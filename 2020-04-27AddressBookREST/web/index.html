@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function getPersons() {
+                fetch("rest/person")
+                .then(data => {
+                    if (data.ok) {
+                        return data.json();
+                    } else {
+                        throw new Error(data.status);
+                    }
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                });
+            }
+            function getPerson() {
+                const inputEl = document.getElementById("personId");
+                fetch("rest/person/" + inputEl.value, {
+                    method: "GET",
+                    cache: "no-cache",
+                    credentials: "same-origin",
+                    headers: {
+                        "Accept": "application/json;charset=UTF-8",
+                        "Content-Type": "application/json;charset=UTF-8"
+                    }
+                })
+                .then(async data => {
+                    if (data.ok) {
+                        try {
+                            return await data.json();
+                        } catch (err) {
+                            return {
+                                firstName: "",
+                                lastName: "",
+                                birthDate: "",
+                                salary: 0
+                            };
+                        }
+                    } else {
+                        throw new Error(data.status);
+                    }
+                })
+                .then(data => {
+                    const fnEl = document.getElementById("fn");
+                    const lnEl = document.getElementById("ln");
+                    const bdEl = document.getElementById("bd");
+                    const sEl = document.getElementById("s");
+                    fnEl.value = data.firstName;
+                    lnEl.value = data.lastName;
+                    bdEl.value = data.birthDate;
+                    sEl.value = data.salary;
+                    console.log(data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                });
+            }
+            function removePerson() {
+                const inputEl = document.getElementById("personId");
+                fetch("rest/person/" + inputEl.value, {
+                    method: "DELETE",
+                    cache: "no-cache",
+                    credentials: "same-origin",
+                    headers: {
+                        "Accept": "application/json;charset=UTF-8",
+                        "Content-Type": "application/json;charset=UTF-8"
+                    }
+                })
+                .then(data => {
+                    if (data.ok) {
+                        console.log("Deleted");
+                    } else {
+                        throw new Error(data.status);
+                    }
+                })
+                .catch(err => {
+                    alert(err.message);
+                });
+            }
+            function createPerson() {
+                const fnEl = document.getElementById("fn");
+                const lnEl = document.getElementById("ln");
+                const bdEl = document.getElementById("bd");
+                const sEl = document.getElementById("s");
+                const person = {
+                    firstName: fnEl.value,
+                    lastName: lnEl.value,
+                    birthDate: bdEl.value,
+                    salary: parseFloat(sEl.value)
+                };
+                fetch("rest/person", {
+                    method: "POST",
+                    cache: "no-cache",
+                    credentials: "same-origin",
+                    headers: {
+                        "Accept": "application/json;charset=UTF-8",
+                        "Content-Type": "application/json;charset=UTF-8"
+                    },
+                    body: JSON.stringify(person)
+                })
+                .then(data => {
+                    if (data.ok) {
+                        return data.json();
+                    } else {
+                        throw new Error(data.status);
+                    }
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                });
+            }
+            function updatePerson() {
+                const inputEl = document.getElementById("personId");
+                const fnEl = document.getElementById("fn");
+                const lnEl = document.getElementById("ln");
+                const bdEl = document.getElementById("bd");
+                const sEl = document.getElementById("s");
+                const person = {
+                    id: parseInt(inputEl.value),
+                    firstName: fnEl.value,
+                    lastName: lnEl.value,
+                    birthDate: bdEl.value,
+                    salary: parseFloat(sEl.value)
+                };
+                fetch("rest/person/" + inputEl.value, {
+                    method: "PUT",
+                    cache: "no-cache",
+                    credentials: "same-origin",
+                    headers: {
+                        "Accept": "application/json;charset=UTF-8",
+                        "Content-Type": "application/json;charset=UTF-8"
+                    },
+                    body: JSON.stringify(person)
+                })
+                .then(data => {
+                    if (data.ok) {
+                        return data.json();
+                    } else {
+                        throw new Error(data.status);
+                    }
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                });
+            }
+            function getPersonAddresses() {
+                const inputEl = document.getElementById("personId");
+                fetch("rest/person/" + inputEl.value + "/address", {
+                    method: "GET",
+                    cache: "no-cache",
+                    credentials: "same-origin",
+                    headers: {
+                        "Accept": "application/json;charset=UTF-8",
+                        "Content-Type": "application/json;charset=UTF-8"
+                    }
+                })
+                .then(async data => {
+                    if (data.ok) {
+                        try {
+                            return await data.json();
+                        } catch (err) {
+                            console.error("failed to parse response", err);
+                            return [];
+                        }
+                    } else {
+                        throw new Error(data.status);
+                    }
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                });
+            }
+            function getAddress() {
+                const inputEl = document.getElementById("personId");
+                const addrInputEl = document.getElementById("addressId");
+                fetch("rest/person/" + inputEl.value + "/address/" + addrInputEl.value, {
+                    method: "GET",
+                    cache: "no-cache",
+                    credentials: "same-origin",
+                    headers: {
+                        "Accept": "application/json;charset=UTF-8",
+                        "Content-Type": "application/json;charset=UTF-8"
+                    }
+                })
+                .then(async data => {
+                    if (data.ok) {
+                        try {
+                            return await data.json();
+                        } catch (err) {
+                            return null;
+                        }
+                    } else {
+                        throw new Error(data.status);
+                    }
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(err => {
+                    alert(err.message);
+                });
+            }
+        </script>
+    </head>
+    <body>
+        Id: <input id="personId" type="number"><br>
+        First name: <input id="fn"><br>
+        Last name: <input id="ln"><br>
+        Birth date: <input id="bd" type="date"><br>
+        Salary: <input id="s" type="number"><br>
+
+        Address Id: <input id="addressId" type="number"><br>
+        <button onclick="getPersons()">GetPersons</button>
+        <button onclick="getPerson()">Get one person</button>
+        <button onclick="removePerson()">Remove one person</button>
+        <button onclick="createPerson()">Create one person</button>
+        <button onclick="updatePerson()">Update one person</button>
+        <button onclick="getPersonAddresses()">GetPerson addresses</button>
+        <button onclick="getAddress()">Get address</button>
+    </body>
+</html>

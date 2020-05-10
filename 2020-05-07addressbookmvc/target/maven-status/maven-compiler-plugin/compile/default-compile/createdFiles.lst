@@ -1,0 +1,9 @@
+lt\bit\addressbookmvc\controllers\ContactController.class
+lt\bit\addressbookmvc\util\Util.class
+lt\bit\addressbookmvc\controllers\PersonController.class
+lt\bit\addressbookmvc\data\DB.class
+lt\bit\addressbookmvc\filters\EmFilter.class
+lt\bit\addressbookmvc\controllers\AddressController.class
+lt\bit\addressbookmvc\data\Address.class
+lt\bit\addressbookmvc\data\Contact.class
+lt\bit\addressbookmvc\data\Person.class

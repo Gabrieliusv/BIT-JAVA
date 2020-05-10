@@ -1,0 +1,15 @@
+lt\bit\addressbookspringdata\config\SpringConfig.class
+lt\bit\addressbookspringdata\dao\PersonDAO.class
+lt\bit\addressbookspringdata\config\MyUserDetails$1.class
+lt\bit\addressbookspringdata\data\Contact.class
+lt\bit\addressbookspringdata\data\Person.class
+lt\bit\addressbookspringdata\controllers\PersonRESTController.class
+lt\bit\addressbookspringdata\data\Address.class
+lt\bit\addressbookspringdata\controllers\ContactController.class
+lt\bit\addressbookspringdata\util\Util.class
+lt\bit\addressbookspringdata\dao\ContactDAO.class
+lt\bit\addressbookspringdata\config\MyUserDetails$1$1.class
+lt\bit\addressbookspringdata\controllers\PersonController.class
+lt\bit\addressbookspringdata\dao\AddressDAO.class
+lt\bit\addressbookspringdata\controllers\AddressController.class
+lt\bit\addressbookspringdata\config\MyUserDetails.class
